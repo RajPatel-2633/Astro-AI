@@ -4,8 +4,7 @@ import User from "../models/User.models.js";
 import { BadRequestError, ConflictError, NotFoundError, UnauthorizedError } from "../utils/ApiError.utils.js";
 import ApiResponse from "../utils/ApiResponse.utils";
 import asyncHandler from "../utils/AsyncHandler.utils";
-import bcrypt from "bcryptjs";
-import { NOT } from "sequelize/lib/deferrable";
+import bcrypt from "bcrypt";
 
 const registerUser = asyncHandler(async(req,res,next)=>{
     const {name,email,password}=req.body;
@@ -68,13 +67,18 @@ const loginUser = asyncHandler(async(req,res,next)=>{
         expiresIn:"7d"
     });
 
-    res.cookie("Access Token",accessToken,accessCookieOptions);
-    res.cookie("Refresh Token",refreshToken,refreshCookieOptions);
+    res.cookie("accessToken",accessToken,accessCookieOptions);
+    res.cookie("refreshToken",refreshToken,refreshCookieOptions);
     return res.status(200).json(new ApiResponse(200,accessToken,"User Logged in Successfully"));
 });
 
 const getProfile = asyncHandler((req,res,next)=>{
-
+    const id = req.user.id;
+    const user = await User.findById(id).select("-password");
+    if(!user){
+        throw new NotFoundError("User Not Found");
+    }
+    return res.status(200).json(new ApiResponse(200,user,"User Profile Fetched Successfully"));
 });
 
 const forgotPassword = asyncHandler(async(req,res,next)=>{
@@ -148,15 +152,55 @@ const verifyOTP = asyncHandler((req,res,next)=>{
 });
 
 const resetPassword = asyncHandler((req,res,next)=>{
-
+    const{email,newPassword}=req.body;
+    if(!email || !newPassword){
+        throw new BadRequestError("All Fields are required");
+    }
+    const user = await User.findOne({email});
+    if(!user){
+        throw new NotFoundError("User not Found");
+    }
+    user.password=newPassword;
+    user.resetPassword=false;
+    await user.save();
+    return res.status(200).json(new ApiResponse(200,null,"Password Updated Successfully"));
 });
 
 const updateProfile =  asyncHandler((req,res,next)=>{
+    const userId = req.user.id;
+    const {name,newPassword} = req.body;
+    const user = await User.findOneAndUpdate(userId);
+    if(!user){
+        throw new NotFoundError("User Not Found");
+    }
+    if(name){
+        user.name = name;
+    }
+    if(newPassword){
+        user.password = newPassword;
+    }
+    await user.save();
 
+    return res.status(200).json(new ApiResponse(200,null,"User Profile Updated Successfully"));
+    
 });
 
 const logoutUser = asyncHandler((req,res,next)=>{
+    const id = req.user.id;
+    res.clearCookie('accessToken',{
+        secure:true,
+        httpOnly:true,
+        sameSite:"lax"
+    });
 
+    res.clearCookie('refreshToken',{
+        secure:true,
+        httpOnly:true,
+        sameSite:"lax"
+    })
+    
+    return res.status(200).json(new ApiResponse(200,null,"User Logged Out Successfully"));
+    
 });
 
 export {registerUser,loginUser,getProfile,forgotPassword,verifyOTP,resetPassword,updateProfile,logoutUser};
