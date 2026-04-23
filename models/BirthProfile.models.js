@@ -54,7 +54,8 @@ const birthProfileSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: ["MALE", "FEMALE", "PREFER NOT TO SAY"]
+        enum: ["MALE", "FEMALE", "PREFER NOT TO SAY"],
+        required:true
     },
     is_primary: {
         type: Boolean,

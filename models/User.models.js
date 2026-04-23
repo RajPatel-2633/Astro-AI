@@ -33,6 +33,14 @@ const userSchema = new mongoose.Schema({
     resetPassword:{
         type:Boolean,
         default:false
+    },
+    ai_requests_today: {
+    type: Number,
+    default: 0
+    },
+    ai_requests_reset_at: {
+        type: Date,
+        default: Date.now
     }
 },{timestamps:true});
 
