@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { Heart, Briefcase, Activity } from 'lucide-react';
 
 const signs = [
@@ -14,6 +15,22 @@ const mockScores = () => ({
 });
 
 const HoroscopeCarousel = () => {
+  const scrollContainerRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (scrollContainerRef.current) {
+      // Get the width of a single card to scroll by exactly one card
+      const container = scrollContainerRef.current;
+      const card = container.querySelector('.snap-start');
+      const scrollAmount = card ? card.offsetWidth + 16 : 300; // 16px is the gap (gap-4)
+      
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-[1em] px-[0.5em]">
@@ -21,7 +38,9 @@ const HoroscopeCarousel = () => {
         <button className="text-[clamp(0.8rem,1vw,1rem)] font-medium text-astra-orange hover:text-astra-brown transition-colors pr-[20px]">View All</button>
       </div>
       
-      <div className="flex overflow-x-auto gap-4 pb-4 snap-x px-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+      <div 
+        ref={scrollContainerRef}
+        className="flex overflow-x-auto gap-4 pb-4 snap-x px-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         <style>{`.overflow-x-auto::-webkit-scrollbar { display: none; }`}</style>
         {signs.map((signData) => {
           const sign = signData.name;
@@ -78,11 +97,11 @@ const HoroscopeCarousel = () => {
 
       {/* Custom Zodiac Scrollbar Track */}
       <div className="w-full mt-4 h-6 bg-gradient-to-b from-[#CBAE75] to-[#EBD59E] rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] border border-[#8B6E4A] flex items-center justify-between px-2 text-[#6D4C31] font-bold text-xs select-none">
-        <span className="cursor-pointer hover:text-black">◀</span>
+        <span className="cursor-pointer hover:text-black px-2" onClick={() => scroll('left')}>◀</span>
         <div className="flex justify-around w-full px-4 tracking-widest text-black/40 gap-3">
           {signs.map((s, i) => <span key={i} className="mx-1">{s.icon}</span>)}
         </div>
-        <span className="cursor-pointer hover:text-black">▶</span>
+        <span className="cursor-pointer hover:text-black px-2" onClick={() => scroll('right')}>▶</span>
       </div>
     </div>
   );

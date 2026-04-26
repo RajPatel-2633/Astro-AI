@@ -30,7 +30,7 @@ const Navbar = () => {
             </Link>
             <Link 
               to="/chart" 
-              className="px-3 py-2 text-sm font-bold text-[#8A5A2B]/70 hover:text-[#8A5A2B] transition-colors"
+              className={`px-3 py-2 text-sm font-bold transition-all ${isActive('/chart') ? 'text-[#8A5A2B] border-b-[3px] border-[#8A5A2B]' : 'text-[#8A5A2B]/70 hover:text-[#8A5A2B]'}`}
             >
               Birth Chart
             </Link>
