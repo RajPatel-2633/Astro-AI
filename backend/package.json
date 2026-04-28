@@ -18,6 +18,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "astronomy-engine": "^2.1.19",
     "axios": "^1.15.2",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",

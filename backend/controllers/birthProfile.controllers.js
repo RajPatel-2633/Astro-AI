@@ -5,8 +5,8 @@ import asyncHandler from "../utils/AsyncHandler.utils.js";
 
 
 const createProfile = asyncHandler(async(req,res)=>{
-    const {label,name,dob,tob,tob_unknown,birth_city,birth_country,gender,is_primary} = req.body;
-    if(!label || !name || !dob || !birth_city || !birth_country || !gender){
+    const {label,name,dob,tob,tob_unknown,birth_city,birth_country,latitude,longitude,timezone,gender,is_primary} = req.body;
+    if(!label || !name || !dob || !birth_city || !birth_country || !gender || !latitude || !longitude || !timezone){
         throw new BadRequestError("All Fields are Required");
     }
 
@@ -25,6 +25,9 @@ const createProfile = asyncHandler(async(req,res)=>{
         tob_unknown,
         birth_city,
         birth_country,
+        latitude,
+        longitude,
+        timezone,
         gender,
         is_primary
     });

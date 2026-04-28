@@ -24,7 +24,7 @@ const birthProfileSchema = new mongoose.Schema({
     },
     tob: {
         type: String,
-        required: false
+        required: true
     },
     tob_unknown: {
         type: Boolean,
@@ -42,15 +42,15 @@ const birthProfileSchema = new mongoose.Schema({
     },
     latitude: {
         type: Number,
-        required: false
+        required: true
     },
     longitude: {
         type: Number,
-        required: false
+        required: true
     },
     timezone: {
         type: String,
-        required: false  
+        required: true  
     },
     gender: {
         type: String,
