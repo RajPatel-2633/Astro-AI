@@ -34,6 +34,9 @@ const userSchema = new mongoose.Schema({
         type:Boolean,
         default:false
     },
+    refreshToken:{
+        type:String,
+    },
     ai_requests_today: {
     type: Number,
     default: 0
