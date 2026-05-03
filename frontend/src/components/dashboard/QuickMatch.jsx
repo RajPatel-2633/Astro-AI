@@ -17,13 +17,13 @@ const QuickMatch = () => {
   };
 
   return (
-    <div className="w-full bg-white/40 backdrop-blur-md rounded-3xl border border-[#8B6E4A]/20 p-6 shadow-lg">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-serif font-bold text-[#4A3319] flex items-center gap-2">
-          <Heart className="w-5 h-5 text-red-500 fill-current" />
-          Quick Match
+    <div className="w-full bg-white/30 rounded-2xl border border-[#8B6E4A]/10 p-5 shadow-inner">
+      <div className="flex items-center justify-between mb-5">
+        <h3 className="text-sm font-bold text-[#4A3319] uppercase tracking-widest flex items-center gap-2">
+          <Heart className="w-4 h-4 text-red-500 fill-current" />
+          Quick Harmony
         </h3>
-        <Sparkles className="w-5 h-5 text-[#C4A15A]" />
+        <Sparkles className="w-4 h-4 text-[#C4A15A] opacity-50" />
       </div>
 
       <div className="space-y-4">

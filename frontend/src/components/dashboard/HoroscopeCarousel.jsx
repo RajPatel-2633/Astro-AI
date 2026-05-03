@@ -145,7 +145,7 @@ const HoroscopeCard = ({ signData, horoscope, onClick }) => {
   const scores = horoscope?.scores ?? {};
   return (
     <div
-      className="snap-start shrink-0 w-[22vw] min-w-[280px] bg-parchment p-[1.5em] flex flex-col gap-[1.2em] relative rounded-2xl cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+      className="snap-start shrink-0 w-[280px] lg:w-[320px] bg-parchment p-[1.5em] flex flex-col gap-[1.2em] relative rounded-2xl cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
       onClick={onClick}
     >
       <div className="absolute top-[1em] left-[1em] w-[4em] h-[2em] engraved-oval flex items-center justify-center -z-0" />
@@ -232,14 +232,15 @@ const HoroscopeCarousel = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-full overflow-hidden">
       {selectedSign && (
         <HoroscopeModal signData={selectedSign} onClose={handleCloseModal} />
       )}
 
-      <div className="flex items-center justify-between mb-[1em] px-[0.5em]">
+      <div className="flex items-center justify-between mt-12 mb-8 px-2">
         <div className="flex items-center gap-3">
-          <h2 className="font-serif text-astra-brown font-semibold text-[clamp(1.5rem,2vw,2rem)]">Today's Horoscopes</h2>
+          <Sparkles className="w-8 h-8 text-[#8B6E4A]" />
+          <h2 className="font-serif text-astra-brown font-bold text-3xl md:text-4xl tracking-wide">Today's Horoscopes</h2>
           <button
             onClick={async () => {
               const toastId = toast.loading("Syncing with AI...");

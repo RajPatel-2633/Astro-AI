@@ -35,7 +35,7 @@ const BirthChart = () => {
 
     if (success) {
       setShowResults(true);
-      
+
       // Use a slight timeout to ensure the DOM has updated and element is visible
       setTimeout(() => {
         if (resultsRef.current) {
@@ -51,7 +51,7 @@ const BirthChart = () => {
 
     setShowResults(false);
     const success = await fetchChartByProfileId(profileId);
-    
+
     if (success) {
       setShowResults(true);
       setTimeout(() => {
@@ -88,29 +88,29 @@ const BirthChart = () => {
           <p className="font-bold text-sm tracking-tight">{error}</p>
         </div>
       )}
-      
+
       <Navbar />
-      
+
       <main className="flex-grow flex flex-col w-full relative z-10">
         {/* Top Split Section */}
         <div className="min-h-[calc(100vh-80px)] flex flex-col lg:flex-row w-full">
-          <BirthDetailsForm 
-            onSubmit={handleFormSubmit} 
-            profiles={profiles} 
-            onProfileSelect={handleProfileSelect} 
+          <BirthDetailsForm
+            onSubmit={handleFormSubmit}
+            profiles={profiles}
+            onProfileSelect={handleProfileSelect}
           />
           <HeroSection />
         </div>
 
         {/* Bottom Results Section */}
-        <div 
-          ref={resultsRef} 
+        <div
+          ref={resultsRef}
           className={`w-full transition-all duration-1000 ${showResults ? 'opacity-100 py-20' : 'opacity-0 h-0 overflow-hidden'}`}
         >
           {showResults && (
-             <ErrorBoundary FallbackComponent={Fallback}>
-                <ChartResults chartData={chartData} />
-             </ErrorBoundary>
+            <ErrorBoundary FallbackComponent={Fallback}>
+              <ChartResults chartData={chartData} />
+            </ErrorBoundary>
           )}
         </div>
       </main>

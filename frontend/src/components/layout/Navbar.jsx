@@ -6,9 +6,9 @@ import useTransitStore from '../../store/useTransitStore';
 
 // ─── Bell / Notification Dropdown ────────────────────────────────────────────
 const IMPACT_COLORS = {
-  high:     'bg-red-100 text-red-700 border-red-200',
-  medium:   'bg-amber-100 text-amber-700 border-amber-200',
-  low:      'bg-blue-100 text-blue-700 border-blue-200',
+  high: 'bg-red-100 text-red-700 border-red-200',
+  medium: 'bg-amber-100 text-amber-700 border-amber-200',
+  low: 'bg-blue-100 text-blue-700 border-blue-200',
   positive: 'bg-green-100 text-green-700 border-green-200',
 };
 
@@ -236,7 +236,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="w-full relative z-50">
+    <nav className="w-full sticky top-0 z-[100] bg-[#EBD6A7]/80 backdrop-blur-lg border-b border-[#C4A15A]/10">
       <div className="absolute inset-0 bg-gradient-to-b from-[#EBD6A7]/80 to-transparent pointer-events-none"></div>
 
       <div className="w-full px-[4vw] relative z-10">
@@ -259,11 +259,10 @@ const Navbar = () => {
               <Link
                 key={to}
                 to={to}
-                className={`px-3 py-2 text-sm font-bold transition-all ${
-                  isActive(to)
+                className={`px-3 py-2 text-sm font-bold transition-all ${isActive(to)
                     ? 'text-[#8A5A2B] border-b-[3px] border-[#8A5A2B]'
                     : 'text-[#8A5A2B]/70 hover:text-[#8A5A2B]'
-                }`}
+                  }`}
               >
                 {label}
               </Link>
@@ -315,7 +314,7 @@ const Navbar = () => {
             </NavDropdown>
 
             {/* Mobile menu button */}
-            <button 
+            <button
               className="md:hidden text-[#8A5A2B] cursor-pointer"
               onClick={() => setIsMobileMenuOpen(true)}
             >
@@ -329,11 +328,11 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-[100] md:hidden">
           {/* Backdrop */}
-          <div 
+          <div
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           ></div>
-          
+
           {/* Drawer */}
           <div className="absolute top-0 right-0 h-full w-[280px] bg-[#FBF3E2] shadow-2xl flex flex-col p-6 animate-in slide-in-from-right duration-300">
             <div className="flex items-center justify-between mb-8">
@@ -349,11 +348,10 @@ const Navbar = () => {
                   key={to}
                   to={to}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`px-4 py-3 rounded-xl font-bold text-lg transition-all ${
-                    isActive(to)
+                  className={`px-4 py-3 rounded-xl font-bold text-lg transition-all ${isActive(to)
                       ? 'bg-[#C4A15A] text-[#FFF5E1]'
                       : 'text-[#8B6E4A] hover:bg-[#C4A15A]/10'
-                  }`}
+                    }`}
                 >
                   {label}
                 </Link>
@@ -361,7 +359,7 @@ const Navbar = () => {
             </div>
 
             <div className="mt-auto pt-8 border-t border-[#C4A15A]/20">
-               <UserDropdown onClose={() => setIsMobileMenuOpen(false)} />
+              <UserDropdown onClose={() => setIsMobileMenuOpen(false)} />
             </div>
           </div>
         </div>

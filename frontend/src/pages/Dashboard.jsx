@@ -8,6 +8,9 @@ import HoroscopeCarousel from '../components/dashboard/HoroscopeCarousel';
 import QuickMatch from '../components/dashboard/QuickMatch';
 import { Sparkles, AlertTriangle, Loader2 } from 'lucide-react';
 import useAppStore from '../store/useAppStore';
+import useAstroStore from '../store/useAstroStore';
+import ServiceCarousel from '../components/dashboard/ServiceCarousel';
+import { useEffect } from 'react';
 
 // Graceful fallback shown if any dashboard card crashes
 const CardFallback = ({ error }) => (
@@ -29,7 +32,14 @@ const LoadingFallback = () => (
 
 const Dashboard = () => {
   const user = useAppStore(state => state.user);
+  const { profiles, fetchProfiles } = useAstroStore();
   const firstName = user?.name?.split(' ')[0] || 'Seeker';
+
+  useEffect(() => {
+    fetchProfiles();
+  }, [fetchProfiles]);
+
+  const isFirstTime = !profiles || profiles.length === 0;
 
   return (
     <div className="min-h-screen bg-[#EBD6A7] font-sans overflow-x-hidden flex flex-col">
@@ -39,7 +49,7 @@ const Dashboard = () => {
         {/* Welcome & Panchang */}
         <div className="space-y-6">
           <h1 className="font-serif text-[#4A3319] font-bold tracking-wider mb-2 text-[clamp(2rem,4vw,3rem)]">
-            Welcome back, <span className="text-[#8A5A2B]">{firstName}</span> ✨
+            {isFirstTime ? 'Explore Your Cosmic Path' : <>Welcome back, <span className="text-[#8A5A2B]">{firstName}</span></>} ✨
           </h1>
           <ErrorBoundary FallbackComponent={CardFallback}>
             <Suspense fallback={<LoadingFallback />}>
@@ -48,31 +58,72 @@ const Dashboard = () => {
           </ErrorBoundary>
         </div>
 
-        {/* Alerts & Personal Area */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(300px,25vw)] gap-[3vw]">
-          <div className="flex flex-col gap-6 w-full min-w-0">
+        {/* Conditional Layout based on Profile Data */}
+        {isFirstTime ? (
+          /* First Time User View */
+          <div className="space-y-4">
             <ErrorBoundary FallbackComponent={CardFallback}>
               <Suspense fallback={<LoadingFallback />}>
-                <TransitAlert />
+                <ServiceCarousel />
               </Suspense>
             </ErrorBoundary>
-            <ErrorBoundary FallbackComponent={CardFallback}>
-              <Suspense fallback={<LoadingFallback />}>
-                <HoroscopeCarousel />
-              </Suspense>
-            </ErrorBoundary>
-          </div>
-          <div className="h-full w-full">
-            <ErrorBoundary FallbackComponent={CardFallback}>
-              <PersonalSignCard />
-            </ErrorBoundary>
-            <div className="mt-6">
+
+            <div className="-mt-4">
               <ErrorBoundary FallbackComponent={CardFallback}>
-                <QuickMatch />
+                <Suspense fallback={<LoadingFallback />}>
+                  <HoroscopeCarousel />
+                </Suspense>
               </ErrorBoundary>
             </div>
           </div>
-        </div>
+        ) : (
+          /* Returning User View */
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 w-full items-start">
+              {/* Left Content: Transits */}
+              <div className="space-y-6 min-w-0">
+                <ErrorBoundary FallbackComponent={CardFallback}>
+                  <Suspense fallback={<LoadingFallback />}>
+                    <div className="space-y-4">
+                      <h2 className="text-3xl font-serif font-bold text-[#4A3319] flex items-center gap-2">
+                        <AlertTriangle className="w-8 h-8 text-astra-orange" />
+                        Critical Planetary Transits
+                      </h2>
+                      <TransitAlert />
+                    </div>
+                  </Suspense>
+                </ErrorBoundary>
+              </div>
+
+              {/* Right Side: Fixed Profile & Tools Area */}
+              <div className="space-y-6 sticky top-24">
+                <div className="bg-parchment/30 p-1 rounded-2xl border border-[#8B6E4A]/10 shadow-inner">
+                  <ErrorBoundary FallbackComponent={CardFallback}>
+                    <PersonalSignCard />
+                  </ErrorBoundary>
+                </div>
+                
+                <div className="bg-parchment p-6 rounded-2xl border border-[#8B6E4A]/30 shadow-lg relative">
+                  <div className="absolute top-2 left-2 w-3 h-3 border-t border-l border-[#8B6E4A]/40"></div>
+                  <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-[#8B6E4A]/40"></div>
+                  <h3 className="text-lg font-serif font-bold text-[#4A3319] mb-4 text-center">Compatibility Engine</h3>
+                  <ErrorBoundary FallbackComponent={CardFallback}>
+                    <QuickMatch />
+                  </ErrorBoundary>
+                </div>
+              </div>
+            </div>
+
+            {/* Full Width Horoscope Section */}
+            <div className="-mt-12">
+              <ErrorBoundary FallbackComponent={CardFallback}>
+                <Suspense fallback={<LoadingFallback />}>
+                  <HoroscopeCarousel />
+                </Suspense>
+              </ErrorBoundary>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
