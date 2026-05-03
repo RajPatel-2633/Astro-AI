@@ -61,12 +61,9 @@ const History = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F4EB] font-sans overflow-x-hidden flex flex-col relative z-0">
-      {/* Dynamic Celestial Background */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#C4A15A]/5 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#8C642A]/5 rounded-full blur-[120px]"></div>
-      </div>
+    <div className="min-h-screen bg-[#EBD6A7] font-sans overflow-x-hidden flex flex-col relative z-0">
+      {/* Soft top gradient */}
+      <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white/30 to-transparent pointer-events-none -z-10"></div>
       
       <Navbar />
       
@@ -78,7 +75,7 @@ const History = () => {
 
         {/* Tabs */}
         <div className="flex justify-center mb-12">
-          <div className="glass-card p-2 rounded-full border-[#C4A15A]/20 shadow-xl flex">
+          <div className="bg-metallic p-2 rounded-full shadow-xl flex border border-[#8B6E4A]/30">
             <button
               onClick={() => setActiveTab('chats')}
               className={`flex items-center gap-3 px-10 py-4 rounded-full font-bold transition-all duration-300 ${
@@ -117,7 +114,7 @@ const History = () => {
                 chatHistory.map((session) => (
                   <div 
                     key={session._id} 
-                    className="glass-card p-8 hover:shadow-2xl transition-all group cursor-pointer border-[#C4A15A]/10"
+                    className="bg-parchment p-8 hover:shadow-2xl transition-all group cursor-pointer border-[#CBAE75]/40"
                     onClick={() => handleItemClick(session, 'chat')}
                   >
                     <div className="flex items-center justify-between">
@@ -140,7 +137,7 @@ const History = () => {
                   </div>
                 ))
               ) : (
-                <div className="text-center py-24 glass-card border-dashed border-[#C4A15A]/30">
+                <div className="text-center py-24 bg-parchment/50 border-dashed border-[#CBAE75] rounded-[32px]">
                   <Sparkles className="w-16 h-16 text-[#C4A15A] mx-auto mb-6 opacity-30 animate-pulse" />
                   <p className="text-xl text-[#8B6E4A] font-serif italic mb-6">No cosmic interactions recorded yet.</p>
                   <button 
@@ -163,7 +160,7 @@ const History = () => {
                 matchHistory.map((match) => (
                   <div 
                     key={match._id} 
-                    className="glass-card p-8 hover:shadow-2xl transition-all group cursor-pointer border-[#C4A15A]/10"
+                    className="bg-parchment p-8 hover:shadow-2xl transition-all group cursor-pointer border-[#CBAE75]/40"
                     onClick={() => handleItemClick(match, 'match')}
                   >
                     <div className="flex items-center justify-between">
@@ -198,7 +195,7 @@ const History = () => {
                   </div>
                 ))
               ) : (
-                <div className="text-center py-24 glass-card border-dashed border-[#C4A15A]/30">
+                <div className="text-center py-24 bg-parchment/50 border-dashed border-[#CBAE75] rounded-[32px]">
                   <Heart className="w-16 h-16 text-[#C4A15A] mx-auto mb-6 opacity-30 animate-pulse" />
                   <p className="text-xl text-[#8B6E4A] font-serif italic mb-6">No soul connections explored yet.</p>
                   <button 
@@ -218,7 +215,7 @@ const History = () => {
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={() => setIsModalOpen(false)}></div>
-          <div className="bg-[#F8F4EB] w-full max-w-3xl max-h-[85vh] rounded-[40px] shadow-2xl relative z-10 flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 border border-white/20">
+          <div className="bg-[#EBD6A7] w-full max-w-3xl max-h-[85vh] rounded-[40px] shadow-2xl relative z-10 flex flex-col overflow-hidden border border-[#8B6E4A]/30">
             {/* Modal Header */}
             <div className="px-10 py-8 border-b border-[#C4A15A]/10 flex items-center justify-between bg-gradient-to-br from-[#FBF3E2] to-transparent">
               <div className="flex items-center gap-5">

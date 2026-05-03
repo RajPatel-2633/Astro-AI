@@ -203,25 +203,28 @@ const BirthDetailsForm = ({ onSubmit, profiles, onProfileSelect }) => {
         )}
 
         {/* Header */}
-        <div className="flex flex-col items-center mb-10 relative z-20 w-full text-center space-y-2">
-          <h2 className="text-5xl font-serif font-bold text-[#4A3319] tracking-tight">Birth Details</h2>
-          <p className="text-sm font-bold text-[#8B6E4A] uppercase tracking-[0.3em]">Enter your celestial coordinates</p>
+        <div className="flex flex-col items-center mb-8 relative z-20 w-full text-center">
+          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-astra-brown tracking-wide mb-2">Birth Details</h2>
+          <p className="text-lg italic text-astra-brown/80">Enter your celestial coordinates</p>
         </div>
 
-        {/* Form Container with glass style */}
-        <div className="w-full glass-card p-10 shadow-2xl relative group transition-all duration-500 hover:border-[#C4A15A]/40">
-          {/* Subtle Sign Aura */}
-          <div className="absolute -top-10 -left-10 w-32 h-32 bg-[#C4A15A]/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-[#C4A15A]/10 transition-all duration-700"></div>
+        {/* Form Container with parchment style */}
+        <div className="w-full bg-parchment p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-[#8B6E4A]/30 relative">
+          {/* Decorative Corner Ornaments */}
+          <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#8B6E4A]/40"></div>
+          <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[#8B6E4A]/40"></div>
+          <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[#8B6E4A]/40"></div>
+          <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#8B6E4A]/40"></div>
 
-          <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Profile Label</label>
-                <input type="text" name="label" value={formData.label} onChange={handleChange} required placeholder="My Chart" className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] text-sm focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium shadow-inner" />
+          <form className="space-y-5 relative z-10" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Profile Label</label>
+                <input type="text" name="label" value={formData.label} onChange={handleChange} required placeholder="My Chart" className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] placeholder-[#8B6E4A]/50 focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm" />
               </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Gender Essence</label>
-                <select name="gender" value={formData.gender} onChange={handleChange} required className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] text-sm focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium shadow-inner cursor-pointer">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Gender Essence</label>
+                <select name="gender" value={formData.gender} onChange={handleChange} required className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm cursor-pointer">
                   <option value="PREFER NOT TO SAY">Select Essence</option>
                   <option value="MALE">Masculine</option>
                   <option value="FEMALE">Feminine</option>
@@ -229,30 +232,30 @@ const BirthDetailsForm = ({ onSubmit, profiles, onProfileSelect }) => {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Full Name</label>
-              <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Seeker of Stars" className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] text-sm placeholder-[#8B6E4A]/30 focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium shadow-inner" />
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Full Name</label>
+              <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Seeker of Stars" className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] placeholder-[#8B6E4A]/50 focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Date of Birth</label>
-                <input type="date" name="dob" value={formData.dob} onChange={handleChange} required className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] text-sm focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium shadow-inner" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Date of Birth</label>
+                <input type="date" name="dob" value={formData.dob} onChange={handleChange} required className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm" />
               </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Time of Birth</label>
-                <input type="time" name="tob" value={formData.tob} onChange={handleChange} required className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] text-sm focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium shadow-inner" />
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Time of Birth</label>
+                <input type="time" name="tob" value={formData.tob} onChange={handleChange} required className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm" />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">City of Birth</label>
-                <input type="text" name="city" value={formData.city} onChange={handleChange} required placeholder="Mumbai" className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] text-sm placeholder-[#8B6E4A]/30 focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium shadow-inner" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">City of Birth</label>
+                <input type="text" name="city" value={formData.city} onChange={handleChange} required placeholder="Mumbai" className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] placeholder-[#8B6E4A]/50 focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm" />
               </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Country</label>
-                <input type="text" name="country" value={formData.country} onChange={handleChange} required placeholder="India" className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] text-sm placeholder-[#8B6E4A]/30 focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium shadow-inner" />
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Country</label>
+                <input type="text" name="country" value={formData.country} onChange={handleChange} required placeholder="India" className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] placeholder-[#8B6E4A]/50 focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm" />
               </div>
             </div>
 
@@ -294,8 +297,11 @@ const BirthDetailsForm = ({ onSubmit, profiles, onProfileSelect }) => {
               </div>
             </label>
 
-            <button type="submit" className="w-full py-5 mt-4 rounded-2xl bg-gradient-to-r from-[#C4A15A] to-[#8C642A] text-[#FFF5E1] font-bold text-base tracking-[0.2em] uppercase shadow-2xl hover:shadow-[0_12px_40px_rgba(139,110,74,0.4)] hover:-translate-y-1 transition-all active:translate-y-0">
-              Consult the Heavens
+            <button
+              type="submit"
+              className="w-full py-4 mt-6 rounded-lg bg-gradient-to-r from-[#C4A15A] to-[#8C642A] text-[#FFF5E1] font-bold text-lg tracking-wider shadow-[0_4px_14px_rgba(139,110,74,0.4)] hover:shadow-[0_6px_20px_rgba(139,110,74,0.6)] hover:-translate-y-0.5 transition-all active:translate-y-0"
+            >
+              Generate Chart
             </button>
 
           </form>

@@ -59,20 +59,23 @@ const PersonForm = ({ title, subtitle, formData, onChange }) => {
   return (
     <div className="w-full flex flex-col items-center">
       {/* Header */}
-      <div className="flex flex-col items-center mb-10 relative z-20 w-full text-center space-y-2">
-        <h2 className="text-4xl font-serif font-bold text-[#4A3319] tracking-tight">{title}</h2>
-        <p className="text-sm font-bold text-[#8B6E4A] uppercase tracking-[0.2em]">{subtitle}</p>
+      <div className="flex flex-col items-center mb-6 relative z-20 w-full text-center">
+        <h2 className="text-3xl lg:text-4xl font-serif font-bold text-astra-brown tracking-wide mb-1">{title}</h2>
+        <p className="text-md italic text-astra-brown/80">{subtitle}</p>
       </div>
 
-      {/* Form Container with glass style */}
-      <div className="w-full max-w-md glass-card p-10 shadow-2xl relative group transition-all duration-500 hover:border-[#C4A15A]/40">
-        {/* Subtle Sign Aura */}
-        <div className="absolute -top-10 -left-10 w-32 h-32 bg-[#C4A15A]/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-[#C4A15A]/10 transition-all duration-700"></div>
+      {/* Form Container with parchment style */}
+      <div className="w-full max-w-md bg-parchment p-6 lg:p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-[#8B6E4A]/30 relative group hover:shadow-[0_12px_40px_rgb(0,0,0,0.15)] transition-all">
+        {/* Decorative Corner Ornaments */}
+        <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#8B6E4A]/40 transition-all group-hover:border-[#C4A15A]"></div>
+        <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[#8B6E4A]/40 transition-all group-hover:border-[#C4A15A]"></div>
+        <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[#8B6E4A]/40 transition-all group-hover:border-[#C4A15A]"></div>
+        <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#8B6E4A]/40 transition-all group-hover:border-[#C4A15A]"></div>
 
-        <div className="space-y-8 relative z-10">
-          <div className="grid grid-cols-1 gap-6">
-            <div className="space-y-2">
-              <label htmlFor={`name-${title}`} className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Full Name</label>
+        <div className="space-y-5 relative z-10">
+          <div className="grid grid-cols-1 gap-4">
+            <div className="space-y-1.5">
+              <label htmlFor={`name-${title}`} className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Full Name</label>
               <input
                 type="text"
                 id={`name-${title}`}
@@ -82,19 +85,19 @@ const PersonForm = ({ title, subtitle, formData, onChange }) => {
                 required
                 autoComplete="name"
                 placeholder="Seeker of Stars"
-                className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] placeholder-[#8B6E4A]/30 focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium text-sm shadow-inner"
+                className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] placeholder-[#8B6E4A]/50 focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm"
               />
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor={`gender-${title}`} className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Gender</label>
+            <div className="space-y-1.5">
+              <label htmlFor={`gender-${title}`} className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Gender</label>
               <select
                 id={`gender-${title}`}
                 name="gender"
                 value={formData.gender || 'PREFER NOT TO SAY'}
                 onChange={handleChange}
                 required
-                className="w-slice px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium text-sm shadow-inner cursor-pointer"
+                className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm cursor-pointer"
               >
                 <option value="PREFER NOT TO SAY">Select Essence</option>
                 <option value="MALE">Masculine</option>
@@ -103,9 +106,9 @@ const PersonForm = ({ title, subtitle, formData, onChange }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label htmlFor={`dob-${title}`} className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Date of Birth</label>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label htmlFor={`dob-${title}`} className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Date of Birth</label>
               <input
                 type="date"
                 id={`dob-${title}`}
@@ -114,12 +117,12 @@ const PersonForm = ({ title, subtitle, formData, onChange }) => {
                 onChange={handleChange}
                 required
                 autoComplete="bday"
-                className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium text-sm shadow-inner"
+                className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm"
               />
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor={`tob-${title}`} className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Time of Birth</label>
+            <div className="space-y-1.5">
+              <label htmlFor={`tob-${title}`} className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Time of Birth</label>
               <input
                 type="time"
                 id={`tob-${title}`}
@@ -127,14 +130,14 @@ const PersonForm = ({ title, subtitle, formData, onChange }) => {
                 value={formData.tob || ''}
                 onChange={handleChange}
                 required
-                className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium text-sm shadow-inner"
+                className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label htmlFor={`city-${title}`} className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">City of Birth</label>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label htmlFor={`city-${title}`} className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">City of Birth</label>
               <input
                 type="text"
                 id={`city-${title}`}
@@ -144,11 +147,11 @@ const PersonForm = ({ title, subtitle, formData, onChange }) => {
                 required
                 autoComplete="address-level2"
                 placeholder="Mumbai"
-                className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] placeholder-[#8B6E4A]/30 focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium text-sm shadow-inner"
+                className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] placeholder-[#8B6E4A]/50 focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm"
               />
             </div>
-            <div className="space-y-2">
-              <label htmlFor={`country-${title}`} className="text-[10px] font-bold text-[#8B6E4A] tracking-[0.2em] uppercase">Country</label>
+            <div className="space-y-1.5">
+              <label htmlFor={`country-${title}`} className="text-xs font-bold text-[#5c3a1d] tracking-wide uppercase">Country</label>
               <input
                 type="text"
                 id={`country-${title}`}
@@ -158,7 +161,7 @@ const PersonForm = ({ title, subtitle, formData, onChange }) => {
                 required
                 autoComplete="country-name"
                 placeholder="India"
-                className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-[#C4A15A]/10 text-[#4A3319] placeholder-[#8B6E4A]/30 focus:outline-none focus:ring-2 focus:ring-[#C4A15A]/30 focus:bg-white/80 transition-all font-medium text-sm shadow-inner"
+                className="w-full px-4 py-3 rounded-lg bg-white/60 border border-[#8B6E4A]/40 text-[#4A3319] placeholder-[#8B6E4A]/50 focus:outline-none focus:ring-2 focus:ring-[#C19E63] transition-all font-medium text-sm"
               />
             </div>
           </div>

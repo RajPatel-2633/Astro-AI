@@ -63,12 +63,9 @@ const BirthChart = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F4EB] font-sans overflow-x-hidden flex flex-col relative z-0">
-      {/* Dynamic Celestial Background */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#C4A15A]/5 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#8C642A]/5 rounded-full blur-[120px]"></div>
-      </div>
+    <div className="min-h-screen bg-[#EBD6A7] font-sans overflow-x-hidden flex flex-col relative z-0">
+      {/* Soft top gradient */}
+      <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white/30 to-transparent pointer-events-none -z-10"></div>
 
       {/* Loading Overlay */}
       {isLoading && (
@@ -87,7 +84,7 @@ const BirthChart = () => {
 
       {/* Error Message */}
       {error && (
-        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 glass-card bg-red-50/90 border-red-200 text-red-700 px-8 py-4 shadow-2xl animate-in slide-in-from-top-4 duration-300">
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-red-100 border border-red-200 text-red-700 px-8 py-4 rounded-2xl shadow-2xl">
           <p className="font-bold text-sm tracking-tight">{error}</p>
         </div>
       )}
@@ -118,10 +115,6 @@ const BirthChart = () => {
         </div>
       </main>
 
-      {/* Floating Decorative Elements */}
-      <div className="fixed bottom-12 right-12 text-[#C4A15A] opacity-20 pointer-events-none -z-10 animate-float">
-        <Sparkles className="w-48 h-48" strokeWidth={0.3} />
-      </div>
     </div>
   );
 };

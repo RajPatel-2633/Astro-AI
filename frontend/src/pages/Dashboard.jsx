@@ -32,10 +32,7 @@ const Dashboard = () => {
   const firstName = user?.name?.split(' ')[0] || 'Seeker';
 
   return (
-    <div className="min-h-screen bg-[#EBD6A7] font-sans overflow-x-hidden flex flex-col relative z-0">
-      {/* Soft central glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-gradient-to-b from-white/30 to-transparent pointer-events-none -z-10"></div>
-
+    <div className="min-h-screen bg-[#EBD6A7] font-sans overflow-x-hidden flex flex-col">
       <Navbar />
 
       <main className="flex-grow w-full px-[4vw] py-8 space-y-8 relative z-10">
@@ -77,11 +74,6 @@ const Dashboard = () => {
           </div>
         </div>
       </main>
-
-      {/* Decorative Star Bottom Right */}
-      <div className="fixed bottom-12 right-12 text-[#FFF5E1] opacity-70 pointer-events-none -z-10">
-        <Sparkles className="w-24 h-24" strokeWidth={1} />
-      </div>
     </div>
   );
 };

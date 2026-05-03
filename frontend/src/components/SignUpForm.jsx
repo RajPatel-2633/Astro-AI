@@ -60,7 +60,7 @@ const SignUpForm = () => {
               placeholder="Seeker of Stars"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-white/50 border border-white/60 text-astra-brown placeholder-astra-brown/40 focus:outline-none focus:ring-2 focus:ring-astra-orange/50 transition-all"
+              className="w-full px-4 py-3 rounded-lg bg-white/70 border border-[#C4A15A]/30 text-astra-brown placeholder-astra-brown/40 focus:outline-none focus:ring-2 focus:ring-astra-orange/50 transition-all"
               required
             />
           </div>
@@ -69,10 +69,10 @@ const SignUpForm = () => {
             <label className="text-sm font-medium text-astra-brown">Email Address</label>
             <input
               type="email"
-              placeholder="seeker@celestial.ai"
+              placeholder="seeker@astro.ai"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-white/50 border border-white/60 text-astra-brown placeholder-astra-brown/40 focus:outline-none focus:ring-2 focus:ring-astra-orange/50 transition-all"
+              className="w-full px-4 py-3 rounded-lg bg-white/70 border border-[#C4A15A]/30 text-astra-brown placeholder-astra-brown/40 focus:outline-none focus:ring-2 focus:ring-astra-orange/50 transition-all"
               required
             />
           </div>
@@ -84,7 +84,7 @@ const SignUpForm = () => {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-white/50 border border-white/60 text-astra-brown placeholder-astra-brown/40 focus:outline-none focus:ring-2 focus:ring-astra-orange/50 transition-all"
+              className="w-full px-4 py-3 rounded-lg bg-white/70 border border-[#C4A15A]/30 text-astra-brown placeholder-astra-brown/40 focus:outline-none focus:ring-2 focus:ring-astra-orange/50 transition-all"
               required
             />
           </div>
@@ -94,7 +94,7 @@ const SignUpForm = () => {
             disabled={isAuthLoading}
             className="w-full py-3 rounded-lg bg-gradient-to-r from-astra-orange to-[#EEB86D] text-astra-brown font-semibold shadow-md hover:shadow-lg transition-all active:scale-[0.98] mt-4 disabled:opacity-70"
           >
-            {isAuthLoading ? 'Aligning...' : 'Begin Your Journey'}
+            {isAuthLoading ? 'Loading...' : 'Sign Up'}
           </button>
         </form>
 
@@ -105,7 +105,7 @@ const SignUpForm = () => {
       </div>
 
       {/* The stars are whispering your name at the very bottom */}
-      <h2 className="text-xl font-serif text-astra-brown mb-6 lg:mb-8 text-center mt-auto pt-4 relative z-20 w-full whitespace-nowrap">The cosmos awaits your arrival.</h2>
+      <h2 className="text-xl font-serif text-astra-brown mb-6 lg:mb-8 text-center mt-auto pt-4 relative z-20 w-full whitespace-nowrap">The stars are whispering your name.</h2>
 
     </div>
   )
