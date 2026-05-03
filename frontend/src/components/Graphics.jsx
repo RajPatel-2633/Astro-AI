@@ -121,7 +121,48 @@ export const ZodiacLoader = () => {
   );
 };
 
-export const AnimatedKundliChart = () => {
+export const AnimatedKundliChart = ({ chartData }) => {
+  const zodiacSigns = {
+    "Aries": 1, "Taurus": 2, "Gemini": 3, "Cancer": 4, "Leo": 5, "Virgo": 6,
+    "Libra": 7, "Scorpio": 8, "Sagittarius": 9, "Capricorn": 10, "Aquarius": 11, "Pisces": 12
+  };
+
+  const ascNum = zodiacSigns[chartData?.ascendant] || 1;
+  const getSignForHouse = (house) => ((ascNum + house - 2) % 12) + 1;
+
+  const planetsByHouse = Array.from({ length: 12 }, () => []);
+  if (chartData?.planets) {
+    chartData.planets.forEach(p => {
+      if (p.house >= 1 && p.house <= 12) {
+        planetsByHouse[p.house - 1].push(p);
+      }
+    });
+  }
+
+  const getPlanetAbbr = (name) => {
+    if (!name) return "";
+    const map = {
+      Sun: "Su", Moon: "Mo", Mars: "Ma", Mercury: "Me",
+      Jupiter: "Ju", Venus: "Ve", Saturn: "Sa", Rahu: "Ra", Ketu: "Ke"
+    };
+    return map[name] || name.substring(0, 2);
+  };
+
+  const houseCoordinates = [
+    { house: 1, x: 50, y: 27.5 },
+    { house: 2, x: 27.5, y: 12.5 },
+    { house: 3, x: 12.5, y: 27.5 },
+    { house: 4, x: 27.5, y: 50 },
+    { house: 5, x: 12.5, y: 72.5 },
+    { house: 6, x: 27.5, y: 87.5 },
+    { house: 7, x: 50, y: 72.5 },
+    { house: 8, x: 72.5, y: 87.5 },
+    { house: 9, x: 87.5, y: 72.5 },
+    { house: 10, x: 72.5, y: 50 },
+    { house: 11, x: 87.5, y: 27.5 },
+    { house: 12, x: 72.5, y: 12.5 },
+  ];
+
   return (
     <div className="relative w-full aspect-square text-[#8B6E4A]">
       <style>
@@ -177,36 +218,41 @@ export const AnimatedKundliChart = () => {
         </svg>
       </div>
 
-      {/* Planets (fading in after drawing) */}
+      {/* Planets and Signs (fading in after drawing) */}
       <div className="absolute inset-0 animate-fade-planets pointer-events-none">
-        {/* House 1 (Top Center) */}
-        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 text-center">
-          <span className="font-bold text-[#5c3a1d] text-sm md:text-base">Asc</span><br/>
-          <span className="text-xs text-[#8B6E4A]">12°</span>
-        </div>
-        {/* House 4 (Left Center) */}
-        <div className="absolute left-[15%] top-1/2 -translate-y-1/2 text-center">
-          <span className="font-bold text-[#5c3a1d] text-sm md:text-base">Moon</span><br/>
-          <span className="text-xs text-[#8B6E4A]">5°</span>
-        </div>
-        {/* House 7 (Bottom Center) */}
-        <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 text-center">
-          <span className="font-bold text-[#5c3a1d] text-sm md:text-base">Saturn</span><br/>
-          <span className="text-xs text-[#8B6E4A]">28°</span>
-        </div>
-        {/* House 10 (Right Center) */}
-        <div className="absolute right-[15%] top-1/2 -translate-y-1/2 text-center">
-          <span className="font-bold text-[#5c3a1d] text-sm md:text-base">Sun</span><br/>
-          <span className="text-xs text-[#8B6E4A]">15°</span>
-        </div>
-        {/* House 2 (Top Left diagonal) */}
-        <div className="absolute top-[30%] left-[30%] -translate-x-1/2 -translate-y-1/2 text-center">
-          <span className="font-bold text-[#5c3a1d] text-xs md:text-sm">Venus</span>
-        </div>
-        {/* House 9 (Bottom Right diagonal) */}
-        <div className="absolute bottom-[30%] right-[30%] translate-x-1/2 translate-y-1/2 text-center">
-          <span className="font-bold text-[#5c3a1d] text-xs md:text-sm">Jupiter</span>
-        </div>
+        {houseCoordinates.map((coord) => {
+          const houseNum = coord.house;
+          const signNum = getSignForHouse(houseNum);
+          const planetsInThisHouse = planetsByHouse[houseNum - 1];
+
+          return (
+            <div 
+              key={houseNum}
+              className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center leading-[1.1]"
+              style={{ left: `${coord.x}%`, top: `${coord.y}%` }}
+            >
+              {/* Zodiac Sign Number */}
+              {chartData && (
+                 <span className="text-[10px] md:text-xs opacity-60 text-[#8B6E4A] font-bold mb-0.5">
+                   {signNum}
+                 </span>
+              )}
+              
+              {/* Fallback mock planets if no chartData */}
+              {!chartData && houseNum === 1 && <span className="font-bold text-[#5c3a1d] text-[10px] md:text-sm">Asc</span>}
+              {!chartData && houseNum === 4 && <span className="font-bold text-[#5c3a1d] text-[10px] md:text-sm">Mo</span>}
+              {!chartData && houseNum === 7 && <span className="font-bold text-[#5c3a1d] text-[10px] md:text-sm">Sa</span>}
+              {!chartData && houseNum === 10 && <span className="font-bold text-[#5c3a1d] text-[10px] md:text-sm">Su</span>}
+
+              {/* Dynamic Planets */}
+              {chartData && planetsInThisHouse.map((p, i) => (
+                <span key={i} className="font-bold text-[#5c3a1d] text-[11px] md:text-sm">
+                  {getPlanetAbbr(p.name)}{p.is_retrograde ? '*' : ''}
+                </span>
+              ))}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

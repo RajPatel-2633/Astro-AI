@@ -1,12 +1,27 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { DrawingChart } from './Graphics'
+import useAppStore from '../store/useAppStore'
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const { signup, isAuthLoading, error, clearError } = useAppStore();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    return () => clearError(); // clear error on unmount
+  }, [clearError]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/dashboard');
+    if (!name || !email || !password) return;
+    const success = await signup(name, email, password);
+    if (success) {
+      navigate('/dashboard');
+    }
   };
 
   return (
@@ -31,13 +46,22 @@ const SignUpForm = () => {
         {/* Semi-Bold Sign Up Header */}
         <h1 className="text-4xl font-serif text-astra-brown mt-6 mb-8 text-center font-semibold">Sign Up</h1>
 
+        {error && (
+          <div className="alert alert-error shadow-lg mb-4 bg-red-100 text-red-800 border-red-200">
+            <span>{error}</span>
+          </div>
+        )}
+
         <form className="w-full space-y-4" onSubmit={handleSubmit}>
           <div className="space-y-1">
             <label className="text-sm font-medium text-astra-brown">Full Name</label>
             <input
               type="text"
               placeholder="Seeker of Stars"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full px-4 py-3 rounded-lg bg-white/50 border border-white/60 text-astra-brown placeholder-astra-brown/40 focus:outline-none focus:ring-2 focus:ring-astra-orange/50 transition-all"
+              required
             />
           </div>
 
@@ -46,7 +70,10 @@ const SignUpForm = () => {
             <input
               type="email"
               placeholder="seeker@celestial.ai"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-lg bg-white/50 border border-white/60 text-astra-brown placeholder-astra-brown/40 focus:outline-none focus:ring-2 focus:ring-astra-orange/50 transition-all"
+              required
             />
           </div>
 
@@ -55,15 +82,19 @@ const SignUpForm = () => {
             <input
               type="password"
               placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 rounded-lg bg-white/50 border border-white/60 text-astra-brown placeholder-astra-brown/40 focus:outline-none focus:ring-2 focus:ring-astra-orange/50 transition-all"
+              required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 rounded-lg bg-gradient-to-r from-astra-orange to-[#EEB86D] text-astra-brown font-semibold shadow-md hover:shadow-lg transition-all active:scale-[0.98] mt-4"
+            disabled={isAuthLoading}
+            className="w-full py-3 rounded-lg bg-gradient-to-r from-astra-orange to-[#EEB86D] text-astra-brown font-semibold shadow-md hover:shadow-lg transition-all active:scale-[0.98] mt-4 disabled:opacity-70"
           >
-            Begin Your Journey
+            {isAuthLoading ? 'Aligning...' : 'Begin Your Journey'}
           </button>
         </form>
 

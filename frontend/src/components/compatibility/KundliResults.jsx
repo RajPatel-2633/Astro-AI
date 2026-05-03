@@ -17,7 +17,11 @@ const InfoCard = ({ title, icon: Icon, children }) => (
   </div>
 );
 
-const KundliResults = () => {
+const KundliResults = ({ matchData }) => {
+  if (!matchData) return null;
+
+  const { match, chart1, chart2 } = matchData;
+
   return (
     <div className="w-full bg-[#EBD6A7] min-h-screen py-12 px-[4vw] relative z-10 flex flex-col items-center">
       <div className="w-full max-w-[1400px] space-y-8">
@@ -46,7 +50,7 @@ const KundliResults = () => {
                 
                 <h3 className="font-serif text-[#4A3319] text-xl font-bold mb-4 w-full text-center border-b border-[#8B6E4A]/20 pb-2">Person 1 Chart</h3>
                 <div className="w-full max-w-[280px]">
-                   <AnimatedKundliChart />
+                   <AnimatedKundliChart chartData={chart1} />
                 </div>
               </div>
 
@@ -59,7 +63,7 @@ const KundliResults = () => {
                 
                 <h3 className="font-serif text-[#4A3319] text-xl font-bold mb-4 w-full text-center border-b border-[#8B6E4A]/20 pb-2">Person 2 Chart</h3>
                 <div className="w-full max-w-[280px]">
-                   <AnimatedKundliChart />
+                   <AnimatedKundliChart chartData={chart2} />
                 </div>
               </div>
 
@@ -70,19 +74,17 @@ const KundliResults = () => {
               
               <InfoCard title="Person 1: Birth Positions" icon={Star}>
                 <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-xs">
-                  <span><span className="font-bold">Sun:</span> Aries 12°</span>
-                  <span><span className="font-bold">Moon:</span> Taurus 5°</span>
-                  <span><span className="font-bold">Mars:</span> Leo 22°</span>
-                  <span><span className="font-bold">Ven:</span> Gemini 2°</span>
+                  {chart1?.planets?.slice(0, 8).map((p, i) => (
+                    <span key={i}><span className="font-bold">{p.name.substring(0, 4)}:</span> {p.sign} {Math.round(p.degree)}°</span>
+                  ))}
                 </div>
               </InfoCard>
 
               <InfoCard title="Person 2: Birth Positions" icon={Star}>
                 <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-xs">
-                  <span><span className="font-bold">Sun:</span> Libra 8°</span>
-                  <span><span className="font-bold">Moon:</span> Cancer 15°</span>
-                  <span><span className="font-bold">Mars:</span> Virgo 1°</span>
-                  <span><span className="font-bold">Ven:</span> Scorpio 12°</span>
+                  {chart2?.planets?.slice(0, 8).map((p, i) => (
+                    <span key={i}><span className="font-bold">{p.name.substring(0, 4)}:</span> {p.sign} {Math.round(p.degree)}°</span>
+                  ))}
                 </div>
               </InfoCard>
 
@@ -100,18 +102,22 @@ const KundliResults = () => {
                 </div>
               </InfoCard>
 
-              <InfoCard title="Strength: Mars & Venus Trine" icon={ShieldCheck}>
-                <p>The harmonious trine between P1's Mars and P2's Venus generates intense physical attraction and romantic passion. You will constantly inspire each other.</p>
+              <InfoCard title="Person 1: Manglik Status" icon={ShieldCheck}>
+                <p>{match?.manglik_p1 ? "Manglik Dosha Present. Requires careful matching or specific remedies before union." : "No Manglik Dosha detected. A favorable placement for marital harmony."}</p>
               </InfoCard>
 
-              <InfoCard title="Weakness: Saturn Squares Moon" icon={ShieldAlert}>
-                <p>P2's Saturn challenges P1's Moon. This indicates periods of emotional coldness or misunderstandings. Patience and open emotional sharing are vital.</p>
+              <InfoCard title="Person 2: Manglik Status" icon={ShieldAlert}>
+                <p>{match?.manglik_p2 ? "Manglik Dosha Present. Requires careful matching or specific remedies before union." : "No Manglik Dosha detected. A favorable placement for marital harmony."}</p>
               </InfoCard>
 
               <InfoCard title="Ashtakoot Score" icon={Scale}>
                 <div className="flex items-center gap-4">
-                  <div className="text-3xl font-serif font-bold text-[#4A3319]">26<span className="text-xl text-[#8B6E4A]">/36</span></div>
-                  <p className="text-xs">A highly auspicious score. Nadi Dosha is absent, and Bhakoot match is excellent.</p>
+                  <div className="text-3xl font-serif font-bold text-[#4A3319]">{match?.total_score || 0}<span className="text-xl text-[#8B6E4A]">/36</span></div>
+                  <div className="text-xs space-y-1">
+                    <p><span className="font-bold">Nadi:</span> {match?.nadi}/8</p>
+                    <p><span className="font-bold">Bhakoot:</span> {match?.bhakoot}/7</p>
+                    <p><span className="font-bold">Gana:</span> {match?.gana}/6</p>
+                  </div>
                 </div>
               </InfoCard>
 
@@ -153,8 +159,8 @@ const KundliResults = () => {
                 <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#C4A15A] to-[#8C642A] flex-shrink-0 flex items-center justify-center mt-1">
                    <Sparkles className="w-4 h-4 text-white" />
                 </div>
-                <div className="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm border border-[#8B6E4A]/20 text-[#4A3319] leading-relaxed relative z-10">
-                  <p>Greetings. I have aligned both charts. Your 26/36 Ashtakoot score is wonderful. The Mars-Venus trine guarantees a passionate bond, though you must navigate the Saturn-Moon square carefully. How can I guide your union today?</p>
+                <div className="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm border border-[#8B6E4A]/20 text-[#4A3319] leading-relaxed relative z-10 text-sm whitespace-pre-wrap">
+                  {match?.ai_summary || "Greetings. I have analyzed your charts."}
                 </div>
               </div>
 
