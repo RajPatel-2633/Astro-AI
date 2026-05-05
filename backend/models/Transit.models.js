@@ -7,7 +7,6 @@ const transitSchema = new mongoose.Schema({
     },
     event_type:{
         type:String,
-        enum:['ingress','retrograde', 'trine', 'fullmoon', 'conjunction'],
         required:true
     },
     from_sign:{
@@ -21,7 +20,7 @@ const transitSchema = new mongoose.Schema({
         required:true
     },
     ends_at:{
-        type:String
+        type:Date
     },
     impact_level:{
         type:String,

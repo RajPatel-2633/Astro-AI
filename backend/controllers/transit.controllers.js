@@ -5,12 +5,26 @@ import asyncHandler from "../utils/AsyncHandler.utils.js";
 
 const getTransits = asyncHandler(async(req,res)=>{
     const {sign} = req.query;
-    let query = { starts_at: { $gte: new Date() } };
+    const now = new Date();
+
+    // Query for transits that are either:
+    // 1. Starting in the future
+    // 2. Currently active (started in past, ends in future)
+    let query = {
+        $or: [
+            { starts_at: { $gte: now } },
+            { 
+                starts_at: { $lte: now },
+                ends_at: { $gte: now }
+            }
+        ]
+    };
+
     if(sign){
-        query.affects_signs = sign.toLowerCase();
+        query.affects_sign = sign.toLowerCase();
     }
 
-    const transits = await Transit.find(query).sort({starts_at:1});
+    const transits = await Transit.find(query).sort({starts_at:1}).limit(9);
     return res.status(200).json(new ApiResponse(200,transits,"Upcoming Transists retrieved"));
 });
 

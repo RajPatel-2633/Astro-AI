@@ -25,19 +25,20 @@ export const getGeminiResponse = async (userPrompt, history=[],systemInstruction
             ],
             model: "llama-3.1-8b-instant", // Fast and very smart
             temperature: 0.7,
-            max_completion_tokens:500.
+            max_completion_tokens: 4096
         });
 
         const content = chatCompletion.choices[0]?.message?.content;
 
         if (!content) {
-            throw new Error("Groq returned an empty response");
+            console.error("❌ Groq returned an empty response");
+            return null;
         }
 
+        console.log("📡 AI Response received (first 100 chars):", content.substring(0, 100) + "...");
         return content;
     } catch (error) {
         console.error("❌ Groq Service Error:", error.message);
-        // Fallback so Raj's controller doesn't crash
-        return "Namaste! I am your Astro AI. How can I help you with your chart today?";
+        return null;
     }
 };

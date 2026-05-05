@@ -1,9 +1,7 @@
 import { getGeminiResponse } from "../services/ai.service.js";
 import Horoscope from "../models/Horoscope.models.js";
+import { extractJson } from "./json.utils.js";
 
-/**
- * Generates a professional Vedic horoscope using AI for a specific sign and date.
- */
 /**
  * Generates professional Vedic horoscopes for ALL 12 signs in a single AI call.
  */
@@ -25,13 +23,14 @@ export const generateAllSignsAIHoroscope = async (dateStr) => {
                 ... (repeat for all 12 signs)
             ]
         }
-        Ensure all 12 signs are included: aries, taurus, gemini, cancer, leo, virgo, libra, scorpio, sagittarius, capricorn, aquarius, pisces.
     `;
 
     try {
         const aiResponse = await getGeminiResponse(prompt, [], "You are a professional Vedic Jyotish Expert. Return only valid JSON.");
-        const jsonStr = aiResponse.replace(/```json/g, '').replace(/```/g, '').trim();
-        const data = JSON.parse(jsonStr);
+        if (!aiResponse) return null;
+
+        const data = extractJson(aiResponse);
+        if (!data || !data.horoscopes) throw new Error("Invalid horoscope data format from AI");
 
         const results = [];
         for (const h of data.horoscopes) {

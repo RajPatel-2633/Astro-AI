@@ -10,7 +10,8 @@ router.get("/seed-db", async (req, res) => {
         await seedAstroData(useAI);
         res.status(200).send(`Database Seeded Successfully! 🌌 (${useAI ? 'AI Generated' : 'Stochastic'})`);
     } catch (err) {
-        res.status(500).send("Seeding failed: " + err.message);
+        console.error("Seeding failed:", err.message);
+        res.status(500).json({ success: false, message: "Seeding failed: " + err.message });
     }
 });
 
