@@ -45,13 +45,13 @@ const loginUser = asyncHandler(async(req,res,next)=>{
         maxAge:1000*60*45,
         httpOnly:true,
         secure:true,
-        sameSite:"lax"
+        sameSite:"none"
     }
     const refreshCookieOptions={
         maxAge:1000*60*60*24*7,
         httpOnly:true,
         secure:true,
-        sameSite:"lax"
+        sameSite:"none"
     }
 
     const accessToken = jwt.sign({
