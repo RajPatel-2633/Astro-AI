@@ -36,7 +36,7 @@ const matchProfile = asyncHandler(async(req,res)=>{
             console.log(" Profile created successfully");
         }
 
-        let chart = await BirthChart.findOne({ profile_id: profile._id });
+        let chart = await BirthChart.findOne({ profile_id: profile._id }).populate("profile_id");
 
         if (!chart) {
             console.log(` Generating new BirthChart for ${data.name}`);
@@ -47,6 +47,8 @@ const matchProfile = asyncHandler(async(req,res)=>{
                 profile_id: profile._id,
                 ...vedicData
             });
+            // Populate after creation too
+            chart = await chart.populate("profile_id");
         }
         return chart;
 
