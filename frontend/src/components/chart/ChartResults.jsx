@@ -243,9 +243,6 @@ const ChartResults = ({ chartData }) => {
   const { mulank, bhagyank } = calculateNumerology(activeProfile?.dob);
   const topRef = useRef(null);
 
-  useEffect(() => {
-    topRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
 
   useEffect(() => {
     if (user?._id && activeProfileId) {
@@ -254,7 +251,9 @@ const ChartResults = ({ chartData }) => {
   }, [user?._id, activeProfileId, initChat]);
 
   useEffect(() => {
-    if (messages.length > 0) {
+    // Only auto-scroll the chat if the user has sent a message (messages.length > 1)
+    // and only use 'nearest' to avoid jumping the whole page if possible
+    if (messages.length > 1) {
       chatEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }, [messages.length]);
