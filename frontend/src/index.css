@@ -2,6 +2,13 @@
 
 @import "tailwindcss";
 
+:root {
+  --accent: #B58900;
+  --accent-bg: #EBD6A7;
+  --accent-border: #D4AF37;
+  --border: rgba(0, 0, 0, 0.1);
+}
+
 @theme {
   --color-astra-bg: #EED8A1;
   --color-astra-dark: #4A3319;
@@ -11,20 +18,24 @@
   --font-sans: "Inter", sans-serif;
 }
 
+
+
 @layer base {
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.2; transform: scale(0.95); }
+  }
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
   body {
     font-family: var(--font-sans);
     background-color: var(--color-astra-bg);
     color: var(--color-astra-dark);
     overflow-x: hidden;
-    .animate-pulse-slow {
-    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
+    
 
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0.2; transform: scale(0.95); }
-  }
+  
 }
   
   h1, h2, h3, h4, h5, h6, .font-serif {
