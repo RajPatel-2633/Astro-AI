@@ -26,7 +26,8 @@ const panchangSchema = new mongoose.Schema({
             start: String,
             end: String
         }
-    }
+    },
+    is_ai: { type: Boolean, default: false }
 },{
     timestamps:true
 });

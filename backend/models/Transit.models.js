@@ -37,6 +37,7 @@ const transitSchema = new mongoose.Schema({
     affects_sign:[{
         type:String
     }],
+    is_ai: { type: Boolean, default: false }
 },{
     timestamps:true
 });

@@ -41,7 +41,8 @@ export const generateAITransits = async () => {
         // Or better: clear all future transits and replace with fresh AI ones to keep it "dynamic".
         await Transit.deleteMany({ starts_at: { $gte: new Date() } });
 
-        const results = await Transit.insertMany(data.transits);
+        const transitsToInsert = data.transits.map(t => ({ ...t, is_ai: true }));
+        const results = await Transit.insertMany(transitsToInsert);
 
         console.log(`✅ ${results.length} AI Transits generated/refreshed.`);
         return results;

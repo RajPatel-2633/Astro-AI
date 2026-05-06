@@ -9,7 +9,15 @@ export const generateAllSignsAIHoroscope = async (dateStr) => {
     const signs = ["aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"];
     
     const prompt = `
-        Generate a professional Vedic horoscope for ALL 12 zodiac signs for the date ${dateStr}.
+        Generate a professional DAILY Vedic horoscope (Rashifal) for ALL 12 zodiac signs for the specific date: ${dateStr}.
+        
+        CRITICAL INSTRUCTIONS:
+        1. Predictions must be for this specific DAY only, NOT for the year or month.
+        2. The "scores" (luck, love, career, health) MUST accurately reflect the sentiment of the "prediction" texts. 
+           - High scores (80+) = Very positive text.
+           - Low scores (<40) = Challenging/Warning text.
+        3. Predictions should be professional, insightful, and use Vedic Astrology terminology.
+        
         Return ONLY a JSON object with this structure:
         {
             "horoscopes": [
@@ -17,7 +25,7 @@ export const generateAllSignsAIHoroscope = async (dateStr) => {
                     "sign": "aries",
                     "prediction": { "general": "...", "love": "...", "career": "...", "health": "..." },
                     "scores": { "luck": 85, "love": 70, "career": 90, "health": 60 },
-                    "lucky_color": "Blue",
+                    "lucky_color": "...",
                     "lucky_number": 7
                 },
                 ... (repeat for all 12 signs)
@@ -40,7 +48,8 @@ export const generateAllSignsAIHoroscope = async (dateStr) => {
                     prediction: h.prediction,
                     scores: h.scores,
                     lucky_color: h.lucky_color,
-                    lucky_number: h.lucky_number
+                    lucky_number: h.lucky_number,
+                    is_ai: true
                 },
                 { upsert: true, new: true }
             );

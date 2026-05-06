@@ -7,8 +7,9 @@ import { extractJson } from "./json.utils.js";
  */
 export const generateAIPanchang = async (dateStr) => {
     const prompt = `
-        Generate a professional Vedic Panchang (Daily Almanac) for the date ${dateStr}.
+        Generate a professional DAILY Vedic Panchang (Daily Almanac) for the specific date: ${dateStr}.
         Include: Tithi, Nakshatra, Yoga, Karana, Moon Phase, Moon Sign, and Timings (Sunrise, Sunset, Rahu Kaal, Auspicious).
+        Ensure all calculations are accurate for this specific day.
         Return ONLY a JSON object with this structure:
         {
             "tithi": "...",
@@ -36,7 +37,8 @@ export const generateAIPanchang = async (dateStr) => {
             { date: dateStr },
             {
                 ...data,
-                date: dateStr
+                date: dateStr,
+                is_ai: true
             },
             { upsert: true, new: true }
         );

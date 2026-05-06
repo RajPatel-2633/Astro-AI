@@ -24,7 +24,8 @@ const horoscopeSchema = new mongoose.Schema({
         health:{ type: Number, default: 50 }
     },
     lucky_color: String,
-    lucky_number: Number
+    lucky_number: Number,
+    is_ai: { type: Boolean, default: false }
 },{
     timestamps:true
 });

@@ -24,7 +24,7 @@ export const seedAstroData = async (useAI = false) => {
 
             // 1. Seed Panchang (Check if already exists for this date)
             const existingPanchang = await Panchang.findOne({ date: dateStr });
-            if (!existingPanchang) {
+            if (!existingPanchang || (useAI && !existingPanchang.is_ai)) {
                 if (useAI) {
                     const panchangSuccess = await generateAIPanchang(dateStr);
                     if (!panchangSuccess) throw new Error(`AI Panchang generation failed for ${dateStr}`);
@@ -47,7 +47,8 @@ export const seedAstroData = async (useAI = false) => {
                                 sunset: "06:42 PM",
                                 rahu_kaal: { start: "01:30 PM", end: "03:00 PM" },
                                 auspicious: { start: "11:45 AM", end: "12:30 PM" }
-                            }
+                            },
+                            is_ai: false
                         },
                         { upsert: true }
                     );
@@ -58,7 +59,7 @@ export const seedAstroData = async (useAI = false) => {
 
             // 2. Seed Horoscopes (Check if at least one exists for this date)
             const existingHoroscope = await Horoscope.findOne({ date: dateStr });
-            if (!existingHoroscope) {
+            if (!existingHoroscope || (useAI && !existingHoroscope.is_ai)) {
                 if (useAI) {
                     const horoscopeSuccess = await generateAllSignsAIHoroscope(dateStr);
                     if (!horoscopeSuccess) throw new Error(`AI Horoscope generation failed for ${dateStr}`);
@@ -80,7 +81,8 @@ export const seedAstroData = async (useAI = false) => {
                                     health: Math.floor(Math.random() * 100)
                                 },
                                 lucky_color: "Royal Blue",
-                                lucky_number: Math.floor(Math.random() * 9) + 1
+                                lucky_number: Math.floor(Math.random() * 9) + 1,
+                                is_ai: false
                             },
                             { upsert: true }
                         );
