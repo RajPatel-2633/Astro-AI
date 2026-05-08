@@ -13,7 +13,7 @@ const getAllHoroscopes = asyncHandler(async(req,res)=>{
 
     // Auto-seed if data is missing or incomplete (less than 12 signs)
     if(!data || data.length < 12){
-        console.log(`🕒 [AUTO-SEED] Horoscope incomplete (${data?.length || 0}/12) for today, generating now...`);
+
         await seedAstroData(true);
         data = await Horoscope.find({date:today});
     }
@@ -45,7 +45,7 @@ const getPanchang = asyncHandler(async(req,res)=>{
         let data = await Panchang.findOne({date:today});
 
         if(!data){
-            console.log("🕒 [AUTO-SEED] Panchang missing for today, generating now...");
+
             await seedAstroData(true);
             data = await Panchang.findOne({date:today});
         }

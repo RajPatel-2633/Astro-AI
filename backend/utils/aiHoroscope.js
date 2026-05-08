@@ -63,7 +63,7 @@ export const generateAllSignsAIHoroscope = async (dateStr) => {
             results.push(updated);
         }
 
-        console.log(`✅ All 12 AI Horoscopes generated for ${dateStr}`);
+
         return results;
     } catch (error) {
         console.error(`❌ AI Generation for all signs failed:`, error.message);

@@ -54,7 +54,7 @@ const initialiseChat = asyncHandler(async (req, res) => {
         console.error("AI Greeting timeout/error, using fallback");
     }
 
-    console.log("AI Greeting Status: Ready");
+
 
     const initialMessage = await ChatMessage.create({
         session_id:chatsession._id,

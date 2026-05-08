@@ -33,7 +33,7 @@ export const getGeminiResponse = async (userPrompt, history=[],systemInstruction
             return null;
         }
 
-        console.log("📡 AI Response received (first 100 chars):", content.substring(0, 100) + "...");
+
         return content;
     } catch (error) {
         console.error("❌ Groq Service Error:", error.message);

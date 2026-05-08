@@ -5,7 +5,7 @@ export const runTransitAI = async(targetMonth = "")=>{
     const month = targetMonth || new Date().toLocaleString('default', { month: 'long' });
     const year = new Date().getFullYear();
 
-    console.log(`Starting AI Transit Sync for ${month} ${year}...`);
+
     const prompt = `
         Act as a professional Vedic Astrologer and Astronomical Data Provider. 
         Generate a list of 5-8 major planetary transits (Ingress, Retrograde, or Full Moons) for ${month} ${year}.
@@ -41,7 +41,7 @@ export const runTransitAI = async(targetMonth = "")=>{
             }
         }));
         const result = await Transit.bulkWrite(operations);
-        console.log(`${month} Sync Complete: ${result.upsertedCount} new records, ${result.modifiedCount} updated.`);
+
         return transits;
     } catch(err){
         console.error("runTransitAI Error:", err.message);

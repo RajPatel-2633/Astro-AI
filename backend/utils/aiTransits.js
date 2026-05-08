@@ -8,8 +8,9 @@ import { extractJson } from "./json.utils.js";
 export const generateAITransits = async () => {
     const today = new Date().toISOString().split('T')[0];
     const prompt = `
-        Generate EXACTLY 15 significant upcoming planetary transits starting from today (${today}).
-        Include major events like sign ingresses, retrogrades, and major conjunctions.
+        Generate EXACTLY 15 significant upcoming planetary transits starting strictly from TODAY (${today}) or in the future.
+        Do NOT include any transits that started before ${today}. 
+        Focus on events occurring in the next 30-45 days.
         Return ONLY a JSON object with this structure:
         {
             "transits": [
@@ -27,7 +28,7 @@ export const generateAITransits = async () => {
                 }
             ]
         }
-        Ensure there are exactly 15 items in the "transits" array, ordered by their start date.
+        Ensure ALL transits have a starts_at date >= ${today}.
     `;
 
     try {
@@ -44,7 +45,7 @@ export const generateAITransits = async () => {
         const transitsToInsert = data.transits.map(t => ({ ...t, is_ai: true }));
         const results = await Transit.insertMany(transitsToInsert);
 
-        console.log(`✅ ${results.length} AI Transits generated/refreshed.`);
+
         return results;
     } catch (error) {
         console.error(`❌ AI Transit generation failed:`, error.message);

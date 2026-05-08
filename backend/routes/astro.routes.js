@@ -11,7 +11,7 @@ router.get("/seed-db", async (req, res) => {
         const force = req.query.force === 'true';
 
         if (force) {
-            console.log("🔥 [FORCE] Clearing existing horoscopes for today...");
+
             const today = new Date().toISOString().split('T')[0];
             await Horoscope.deleteMany({ date: today });
         }

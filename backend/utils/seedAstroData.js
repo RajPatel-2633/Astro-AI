@@ -9,7 +9,7 @@ export const seedAstroData = async (useAI = false) => {
     const signs = ["aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"];
     
     try {
-        console.log(`Starting Seed Process (${useAI ? 'AI MODE' : 'STOCHASTIC MODE'})`);
+
 
         // If AI mode, we refresh transits too
         if (useAI) {
@@ -54,7 +54,7 @@ export const seedAstroData = async (useAI = false) => {
                     );
                 }
             } else {
-                console.log(`ℹ️ Panchang already exists for ${dateStr}, skipping.`);
+
             }
 
             // 2. Seed Horoscopes (Check if all 12 signs exist for this date)
@@ -63,7 +63,7 @@ export const seedAstroData = async (useAI = false) => {
 
             if (horoscopeCount < 12 || (useAI && hasNonAI)) {
                 if (useAI) {
-                    console.log(`✨ Generating AI Horoscopes for ${dateStr}...`);
+
                     const horoscopeSuccess = await generateAllSignsAIHoroscope(dateStr);
                     if (!horoscopeSuccess) throw new Error(`AI Horoscope generation failed for ${dateStr}`);
                 } else if (horoscopeCount < 12) {
@@ -93,11 +93,11 @@ export const seedAstroData = async (useAI = false) => {
                     await Promise.all(horoscopePromises);
                 }
             } else {
-                console.log(`ℹ️ Horoscopes already exist for ${dateStr}, skipping.`);
+
             }
         }
 
-        console.log("Successfully seeded Astro data!");
+
 
         // 3. Seed fallback Transits (if not using AI and none exist)
         if (!useAI) {
@@ -132,7 +132,7 @@ export const seedAstroData = async (useAI = false) => {
                         affects_sign: ["gemini", "aries", "leo", "libra", "aquarius"]
                     }
                 ]);
-                console.log("Fallback transit data seeded.");
+
             }
         }
 

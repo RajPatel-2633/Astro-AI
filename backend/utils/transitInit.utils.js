@@ -15,16 +15,16 @@ export const initialiseTransitAutomation = async()=>{
         });
 
         if(count === 0 ){
-            console.log("No transits found for this month. Initializing via AI..");
+
             await runTransitAI();
         } else {
-            console.log("Transits for this month already present in DB.");
+
         }
 
         cron.schedule("0 0 1 * *", async () => {
-            console.log("Monthly Cron: Syncing new transits...");
+
             await runTransitAI();
-            console.log("Finished");
+
         },{
             scheduled:true,
             timezone:"Asia/Kolkata"

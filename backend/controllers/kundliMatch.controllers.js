@@ -24,22 +24,22 @@ const matchProfile = asyncHandler(async(req,res)=>{
         });
 
         if (!profile) {
-            console.log(` Attempting to create profile for: ${data.name}`);
+
             
             // LOG THE DATA TO SEE WHAT'S ACTUALLY BEING SENT
-            console.log("Payload being sent to DB:", { user_id: userId, ...data });
+
 
             profile = await BirthProfile.create({
                 user_id: userId, // Fixed: use user_id to match your likely schema
                 ...data
             });
-            console.log(" Profile created successfully");
+
         }
 
         let chart = await BirthChart.findOne({ profile_id: profile._id }).populate("profile_id");
 
         if (!chart) {
-            console.log(` Generating new BirthChart for ${data.name}`);
+
             // Service is synchronous, so no await needed, but calling it inside a try
             const vedicData = calculateVedicChart(data.dob, data.tob, data.latitude, data.longitude, data.timezone);
 

@@ -43,7 +43,7 @@ export const generateAIPanchang = async (dateStr) => {
             { upsert: true, new: true }
         );
 
-        console.log(`✅ AI Panchang generated for ${dateStr}`);
+
         return updated;
     } catch (error) {
         console.error(`❌ AI Panchang generation failed:`, error.message);
