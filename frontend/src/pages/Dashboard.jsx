@@ -58,7 +58,7 @@ const Dashboard = () => {
       <main className="flex-grow w-full px-[4vw] py-8 space-y-12 relative z-10">
         {/* Welcome & Panchang */}
         <div className="space-y-6">
-          <h1 className="font-serif text-[#4A3319] font-bold tracking-wider mb-2 text-3xl md:text-5xl lg:text-6xl">
+          <h1 className="font-serif text-[#4A3319] font-bold tracking-wider mb-2 text-3xl md:text-4xl lg:text-5xl">
             {isFirstTime ? 'Explore Your Cosmic Path' : <>Welcome back, <span className="text-[#8A5A2B]">{firstName}</span></>} ✨
           </h1>
           <ErrorBoundary FallbackComponent={CardFallback}>
