@@ -69,7 +69,7 @@ const BirthChart = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#EBD6A7] font-sans overflow-x-hidden flex flex-col relative z-0">
+    <div className="min-h-screen bg-[#EBD6A7] font-sans flex flex-col relative z-0">
       {/* Soft top gradient */}
       <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white/30 to-transparent pointer-events-none -z-10"></div>
 
@@ -99,7 +99,7 @@ const BirthChart = () => {
 
       <main className="flex-grow flex flex-col w-full relative z-10">
         {/* Balanced Split Layout: Form + Profiles */}
-        <div className="w-full px-[8vw] py-16 flex flex-col lg:flex-row gap-16 justify-center items-start">
+        <div className="w-full px-4 md:px-[8vw] py-16 flex flex-col lg:flex-row gap-16 justify-center items-start">
           {/* Main Form Area: Centered in its section */}
           <div className="flex-grow lg:w-[65%] flex flex-col items-center">
             <div className="w-full max-w-2xl">

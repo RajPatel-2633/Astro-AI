@@ -52,13 +52,13 @@ const Dashboard = () => {
   const isFirstTime = !profiles || profiles.length === 0;
 
   return (
-    <div className="min-h-screen bg-[#EBD6A7] font-sans overflow-x-hidden flex flex-col">
+    <div className="min-h-screen bg-[#EBD6A7] font-sans flex flex-col">
       <Navbar />
 
-      <main className="flex-grow w-full px-[4vw] py-8 space-y-8 relative z-10">
+      <main className="flex-grow w-full px-[4vw] py-8 space-y-12 relative z-10">
         {/* Welcome & Panchang */}
         <div className="space-y-6">
-          <h1 className="font-serif text-[#4A3319] font-bold tracking-wider mb-2 text-[clamp(2rem,4vw,3rem)]">
+          <h1 className="font-serif text-[#4A3319] font-bold tracking-wider mb-2 text-3xl md:text-5xl lg:text-6xl">
             {isFirstTime ? 'Explore Your Cosmic Path' : <>Welcome back, <span className="text-[#8A5A2B]">{firstName}</span></>} ✨
           </h1>
           <ErrorBoundary FallbackComponent={CardFallback}>
@@ -71,14 +71,14 @@ const Dashboard = () => {
         {/* Conditional Layout based on Profile Data */}
         {isFirstTime ? (
           /* First Time User View */
-          <div className="space-y-4">
+          <div className="space-y-12">
             <ErrorBoundary FallbackComponent={CardFallback}>
               <Suspense fallback={<LoadingFallback />}>
                 <ServiceCarousel />
               </Suspense>
             </ErrorBoundary>
 
-            <div className="-mt-4">
+            <div className="mt-8">
               <ErrorBoundary FallbackComponent={CardFallback}>
                 <Suspense fallback={<LoadingFallback />}>
                   <HoroscopeCarousel />
@@ -88,15 +88,15 @@ const Dashboard = () => {
           </div>
         ) : (
           /* Returning User View */
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 w-full items-start">
+          <div className="space-y-12">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 lg:gap-12 w-full items-start">
               {/* Left Content: Transits */}
-              <div className="space-y-6 min-w-0">
+              <div className="space-y-8 min-w-0">
                 <ErrorBoundary FallbackComponent={CardFallback}>
                   <Suspense fallback={<LoadingFallback />}>
-                    <div className="space-y-4">
-                      <h2 className="text-3xl font-serif font-bold text-[#4A3319] flex items-center gap-2">
-                        <AlertTriangle className="w-8 h-8 text-astra-orange" />
+                    <div className="space-y-6">
+                      <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#4A3319] flex items-center gap-3">
+                        <AlertTriangle className="w-7 h-7 md:w-8 md:h-8 text-astra-orange" />
                         Critical Planetary Transits
                       </h2>
                       <TransitAlert />
@@ -106,7 +106,7 @@ const Dashboard = () => {
               </div>
 
               {/* Right Side: Fixed Profile & Tools Area */}
-              <div className="space-y-6 sticky top-24">
+              <div className="space-y-8 lg:sticky lg:top-24">
                 <div className="bg-parchment/30 p-1 rounded-2xl border border-[#8B6E4A]/10 shadow-inner">
                   <ErrorBoundary FallbackComponent={CardFallback}>
                     <PersonalSignCard />
@@ -125,7 +125,7 @@ const Dashboard = () => {
             </div>
 
             {/* Full Width Horoscope Section */}
-            <div className="-mt-12">
+            <div className="mt-12">
               <ErrorBoundary FallbackComponent={CardFallback}>
                 <Suspense fallback={<LoadingFallback />}>
                   <HoroscopeCarousel />

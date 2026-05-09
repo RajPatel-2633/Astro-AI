@@ -89,11 +89,11 @@ const PersonalSignCard = () => {
         {/* Top Banner */}
         <div className="w-full bg-gradient-to-b from-[#E5CAA0] to-[#E0C090] px-[1.5em] pt-[1.5em] pb-[2em] relative z-0 border-b border-[#CBAE75] shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
           <div className="flex justify-between items-start">
-            <div className="mt-2">
-              <h2 className="font-serif text-[#4A3319] font-bold tracking-tight drop-shadow-sm text-[clamp(2rem,3vw,2.5rem)] capitalize">
+            <div className="mt-2 max-w-[65%]">
+              <h2 className="font-serif text-[#4A3319] font-bold tracking-tight drop-shadow-sm text-[clamp(1.8rem,3vw,2.5rem)] capitalize truncate">
                 {sunSign ? sunSign.charAt(0).toUpperCase() + sunSign.slice(1) : primaryProfile.name}
               </h2>
-              <p className="text-[clamp(0.8rem,1vw,1rem)] text-[#4A3319]/80 font-semibold tracking-wide mt-1">
+              <p className="text-[clamp(0.75rem,1vw,0.9rem)] text-[#4A3319]/80 font-semibold tracking-wide mt-1">
                 {sunSign ? `Sun Sign • ${ZODIAC_SUBTITLE[sunSign] || ''}` : 'Birth Chart not yet generated'}
               </p>
               {primaryProfile.is_primary && (
@@ -106,7 +106,7 @@ const PersonalSignCard = () => {
         </div>
 
         {/* 3D Astrolabe Luck Ring */}
-        <div className="absolute right-6 top-[2.5rem] z-20">
+        <div className="absolute right-0 top-6 z-20 scale-95 lg:scale-100">
           <div className="relative w-32 h-32 flex items-center justify-center rounded-full astrolabe-ring border-[4px] border-[#FFF8E7]">
             <div className="absolute inset-0 rounded-full border-[6px] border-dashed border-[#8B6E4A]/40 m-1 pointer-events-none"></div>
             <div className="w-[100px] h-[100px] rounded-full astrolabe-inner bg-[#F4E8D3] flex items-center justify-center relative">

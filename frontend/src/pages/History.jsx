@@ -61,7 +61,7 @@ const History = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#EBD6A7] font-sans overflow-x-hidden flex flex-col relative z-0">
+    <div className="min-h-screen bg-[#EBD6A7] font-sans flex flex-col relative z-0">
       {/* Soft top gradient */}
       <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white/30 to-transparent pointer-events-none -z-10"></div>
       

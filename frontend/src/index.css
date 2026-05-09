@@ -46,10 +46,11 @@
 
 @layer utilities {
   .text-gold-3d {
-    background: linear-gradient(180deg, #EAD7A1 0%, #D4B26A 40%, #A57D33 60%, #E8D097 100%);
+    background: linear-gradient(180deg, #C4A15A 0%, #8C642A 40%, #4A3319 60%, #8C642A 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.4)) drop-shadow(0px -1px 0px rgba(255,255,255,0.4));
+    filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.3));
+    letter-spacing: -0.02em;
   }
 
   .bg-metallic {

@@ -50,7 +50,7 @@ const QuickMatch = () => {
         <button
           onClick={handleMatch}
           disabled={isLoading}
-          className="w-full py-3 rounded-xl bg-gradient-to-r from-[#C4A15A] to-[#8C642A] text-[#FFF5E1] font-bold text-sm shadow-md hover:shadow-lg transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full py-[1em] rounded-xl bg-gradient-to-b from-[#6A4B29] to-[#4A3319] text-[#F4E8D3] font-bold shadow-[0_4px_15px_rgba(62,39,0,0.3)] border border-[#3A2814] hover:from-[#5C4020] hover:to-[#3A2814] transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
         >
           {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Check Harmony'}
         </button>

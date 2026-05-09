@@ -61,7 +61,7 @@ const Compatibility = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#EBD6A7] font-sans overflow-x-hidden flex flex-col relative z-0">
+    <div className="min-h-screen bg-[#EBD6A7] font-sans flex flex-col relative z-0">
       {/* Soft top gradient */}
       <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-white/30 to-transparent pointer-events-none -z-10"></div>
       
@@ -91,7 +91,7 @@ const Compatibility = () => {
       
       <main className="flex-grow flex flex-col w-full relative z-10">
         {/* Top 50/50 Split Section */}
-        <div className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center w-full px-8 py-20">
+        <div className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center w-full px-4 md:px-8 py-20">
           
           {/* Page Title */}
           <div className="text-center mb-12 space-y-2">
